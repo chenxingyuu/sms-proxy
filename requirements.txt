@@ -1,0 +1,17 @@
+# 基础工具
+ghkit==0.0.4
+pre-commit==4.1.0
+
+# Web框架与相关工具
+fastapi~=0.108.0
+uvicorn==0.30.1
+socketio==0.2.1
+fastapi_socketio==0.0.10
+
+# 数据库驱动
+redis==5.2.1
+
+# 加密与认证
+bcrypt==3.1.7
+passlib==1.7.4
+python-jose==3.4.0

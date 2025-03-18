@@ -1,0 +1,17 @@
+# config.ini
+[app]
+project_name = SMS Proxy
+api_version = /api/v1
+debug = true
+host = 0.0.0.0
+port = 8000
+
+[redis]
+host = localhost
+port = 6379
+password = root
+default_db = 0
+
+[feishu]
+webhook_url =
+secret =
