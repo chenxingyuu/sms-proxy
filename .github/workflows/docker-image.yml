@@ -10,10 +10,14 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
-      # 1. 检出代码
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # 2. 构建 Docker 镜像
+      - name: Login to Aliyun Container Registry
+        run: echo ${{ secrets.ACR_PASSWORD }} | docker login --username ${{ secrets.ACR_USERNAME }} registry.cn-hangzhou.aliyuncs.com --password-stdin
+
       - name: Build Docker image
-        run: sh ./docker-build.sh
+        run: docker build -t registry.cn-hangzhou.aliyuncs.com/daxx/sms-proxy:1.0.0 .
+
+      - name: Push Docker image
+        run: docker push registry.cn-hangzhou.aliyuncs.com/daxx/sms-proxy:1.0.0
