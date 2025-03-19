@@ -4,7 +4,7 @@ LABEL authors="chenxingyu"
 
 # 安装 tzdata 包以设置时区
 RUN apt-get update && \
-    apt-get install -y tzdata && \
+    apt-get install -y tzdata gcc && \
     rm -rf /var/lib/apt/lists/*
 
 # 设置时区环境变量（例如：Asia/Shanghai）
