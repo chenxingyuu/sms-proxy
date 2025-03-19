@@ -20,5 +20,8 @@ RUN pip install --no-cache-dir -r requirements.txt -i https://mirrors.aliyun.com
 # 将当前目录内容复制到 /app 目录
 COPY . /app
 
+# 设置 PYTHONPATH 环境变量
+ENV PYTHONPATH="${PYTHONPATH}:/app/"
+
 # 运行主程序
 CMD ["python", "main.py"]

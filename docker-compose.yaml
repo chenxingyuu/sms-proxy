@@ -1,0 +1,17 @@
+services:
+  server:
+    image: registry-vpc.cn-hangzhou.aliyuncs.com/daxx/sms-proxy:1.0.0
+    ports:
+      - "2372:8000"
+    restart: always
+    volumes:
+      - ./config.ini:/app/config.ini
+    command: [ "python", "main.py" ]
+
+  task:
+    image: registry-vpc.cn-hangzhou.aliyuncs.com/daxx/sms-proxy:1.0.0
+    restart: always
+    volumes:
+      - ./config.ini:/app/config.ini
+    working_dir: /app/crontabs
+    command: [ "python", "task.py" ]
