@@ -7,12 +7,13 @@ on:
     branches: [ "main" ]
 
 jobs:
-
-  build:
-
+  docker:
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v4
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag registry.cn-hangzhou.aliyuncs.com/daxx/sms-proxy:v1.0.0
+      # 1. 检出代码
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # 2. 构建 Docker 镜像
+      - name: Build Docker image
+        run: sh ./docker-build.sh
