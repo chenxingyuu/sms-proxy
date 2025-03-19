@@ -30,6 +30,7 @@ class SecurityConfig:
     secret_key: str
     algorithm: str
     token_expire_days: int
+    api_key: str
 
 
 @dataclass
@@ -39,11 +40,21 @@ class FeishuConfig:
 
 
 @dataclass
+class MasConfig:
+    app_id: str
+    secret_key: str
+    ec_name: str
+    api_url: str
+    sign: str
+
+
+@dataclass
 class Settings:
     app: AppConfig
     redis: RedisConfig
     security: SecurityConfig
     feishu: FeishuConfig
+    mas: MasConfig
 
 
 def get_config_path() -> str:
@@ -70,16 +81,20 @@ def read_config() -> Settings:
     app_config.port = config.getint("app", "port")
 
     redis_config = RedisConfig(**config["redis"])
+
     security_config = SecurityConfig(**config["security"])
     security_config.token_expire_days = config.getint("security", "token_expire_days")
 
     feishu_config = FeishuConfig(**config["feishu"])
+
+    mas_config = MasConfig(**config["mas"])
 
     return Settings(
         app=app_config,
         redis=redis_config,
         security=security_config,
         feishu=feishu_config,
+        mas=mas_config,
     )
 
 

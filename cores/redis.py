@@ -7,3 +7,10 @@ REDIS = redis_client.RedisClient(
     password=settings.redis.password,
     db=settings.redis.default_db
 )
+
+ASYNC_REDIS = redis_client.AsyncRedisClient(
+    host=settings.redis.host,
+    port=settings.redis.port,
+    password=settings.redis.password,
+    db=settings.redis.default_db
+)

@@ -15,3 +15,10 @@ default_db = 0
 [feishu]
 webhook_url =
 secret =
+
+[mas]
+app_id =
+secret_key =
+ec_name = 广州白云国际机场建设发展有限公司
+api_url = https://112.35.10.201:28888/sms/norsubmit
+sign =
