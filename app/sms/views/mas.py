@@ -1,23 +1,16 @@
 import hashlib
 import json
 from dataclasses import dataclass
-from typing import Union, List, Dict, Optional
+from typing import Union, List, Dict
 
-from fastapi import APIRouter, Header, HTTPException, Depends
+from fastapi import APIRouter, HTTPException, Depends
 from pydantic import BaseModel
 
-from cores.config import settings
 from cores.log import LOG
 from cores.redis import ASYNC_REDIS
+from cores.security import verify_api_key
 
 mas_router = APIRouter()
-
-
-# 鉴权依赖项
-def verify_api_key(x_api_key: Optional[str] = Header(None)):
-    if x_api_key != settings.security.api_key:
-        LOG.warning("API Key 校验失败")
-        raise HTTPException(status_code=401, detail="Unauthorized")
 
 
 # 请求体定义
@@ -50,7 +43,7 @@ async def enqueue_sms(messages: List[Message]):
 
 
 # 短信发送接口
-@mas_router.post("/send_sms", dependencies=[Depends(verify_api_key)])
+@mas_router.post("/send", dependencies=[Depends(verify_api_key)])
 async def send_sms(request: SmsRequest):
     LOG.info(f"请求参数: {request = }")
 
