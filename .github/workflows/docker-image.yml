@@ -8,6 +8,7 @@ on:
 
 jobs:
   docker:
+    if: "!contains(join(github.event.commits.*.message, ' '), '[skip ci]')"
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
