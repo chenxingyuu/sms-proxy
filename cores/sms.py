@@ -56,7 +56,7 @@ class CMCCMasSMS:
             response = requests.post(f"{self.api_url}", json=encode, verify=False)
             response_data = response.json() if response.status_code == 200 else {}
             if not response_data.get("success", False):
-                LOG.error(f"短信发送失败: {response_data}")
+                raise Exception(f"短信发送失败: {response_data}")
             else:
                 LOG.info(f"短信发送成功: {response_data}")
 
