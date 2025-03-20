@@ -95,6 +95,9 @@ async def apply_filter_rule(data: dict, token: str):
     rule_names = await ASYNC_REDIS.keys(f"rules:{token}:*")
     contents = list(search_value(data, "content"))
 
+    # 过滤时间
+    contents = [content for content in contents if "时间" not in content]
+
     # 过滤最近发送的内容
     msg_hash = hashlib.md5(json.dumps(contents).encode()).hexdigest()
     cache_key = f"feishu:{msg_hash}"
