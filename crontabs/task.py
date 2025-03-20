@@ -15,12 +15,6 @@ class MasTask(BaseScript):
     def __call__(self, *args, **kwargs):
         """
         每 5 秒消费 Redis 队列的短信，并批量发送
-        msg_hash = hashlib.md5(f"{message.phone_number}_{message.message}".encode()).hexdigest()
-        cache_key = f"mas:sms:{msg_hash}"
-
-        if not await ASYNC_REDIS.set(cache_key, "sent", ex=60, nx=True):
-            LOG.warning(f"相同短信 60 秒内不重复发送 {message = }")
-            continue
         """
         sms_batch = []
 

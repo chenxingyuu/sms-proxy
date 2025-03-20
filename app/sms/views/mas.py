@@ -6,6 +6,7 @@ from typing import Union, List, Dict
 from fastapi import APIRouter, HTTPException, Depends
 from pydantic import BaseModel
 
+from cores.config import settings
 from cores.log import LOG
 from cores.redis import ASYNC_REDIS
 from cores.security import verify_api_key
@@ -30,7 +31,7 @@ async def enqueue_sms(messages: List[Message]):
         msg_hash = hashlib.md5(f"{message.phone_number}_{message.message}".encode()).hexdigest()
         cache_key = f"mas:sms:{msg_hash}"
 
-        if not await ASYNC_REDIS.set(cache_key, "sent", ex=60, nx=True):
+        if not await ASYNC_REDIS.set(cache_key, "sent", ex=settings.rules.sms_same_message_interval, nx=True):
             LOG.warning(f"相同短信 60 秒内不重复发送 {message = }")
             continue
 

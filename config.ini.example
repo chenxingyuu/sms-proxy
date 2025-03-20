@@ -22,3 +22,7 @@ secret_key =
 ec_name = 广州白云国际机场建设发展有限公司
 api_url = https://112.35.10.201:28888/sms/norsubmit
 sign =
+
+[rules]
+feishu_same_message_interval = 60
+sms_same_message_interval = 60

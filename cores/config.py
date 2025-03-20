@@ -49,12 +49,19 @@ class MasConfig:
 
 
 @dataclass
+class Rules:
+    feishu_same_message_interval: int
+    sms_same_message_interval: int
+
+
+@dataclass
 class Settings:
     app: AppConfig
     redis: RedisConfig
     security: SecurityConfig
     feishu: FeishuConfig
     mas: MasConfig
+    rules: Rules
 
 
 def get_config_path() -> str:
@@ -89,12 +96,15 @@ def read_config() -> Settings:
 
     mas_config = MasConfig(**config["mas"])
 
+    rules = Rules(**config["rules"])
+
     return Settings(
         app=app_config,
         redis=redis_config,
         security=security_config,
         feishu=feishu_config,
         mas=mas_config,
+        rules=rules
     )
 
 

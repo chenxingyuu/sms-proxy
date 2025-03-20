@@ -122,21 +122,7 @@ class BaseScript(metaclass=ScriptMeta):
                                 "token": "ram_outlined",
                                 "color": "grey"
                             }
-                        },
-                        {
-                            "tag": "action",
-                            "layout": "default",
-                            "actions": [
-                                {
-                                    "tag": "button",
-                                    "text": {"tag": "plain_text", "content": "收到"},
-                                    "type": "default",
-                                    "complex_interaction": True,
-                                    "width": "default",
-                                    "size": "medium",
-                                }
-                            ],
-                        },
+                        }
                     ]
                 },
                 "i18n_header": {
