@@ -53,7 +53,7 @@ class CMCCMasSMS:
         LOG.info(json.dumps(payload, ensure_ascii=False))
         encode = base64.b64encode(json.dumps(payload, ensure_ascii=False).encode("utf-8")).decode("utf-8")
         try:
-            response = requests.post(f"{self.api_url}", json=encode, verify=False)
+            response = requests.post(f"{self.api_url}", json=encode, verify=False, timeout=5)
             response_data = response.json() if response.status_code == 200 else {}
             if not response_data.get("success", False):
                 raise Exception(f"短信发送失败: {response_data}")
